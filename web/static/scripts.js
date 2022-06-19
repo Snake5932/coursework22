@@ -556,6 +556,8 @@ let prev_gen_page_book = function() {
 
 let setChecks = function() {
     let table_div = document.getElementById("table_div_check");
+    table_div.innerHTML = ""
+    document.getElementById("dataMessage").innerText = ""
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/getlist', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -1082,8 +1084,10 @@ let findBook_gen = function() {
 
 let clear_reader = function() {
     document.getElementById("user_book_reader").innerHTML = "";
+    document.getElementById("reader_emb").innerHTML = "";
 }
 
 let clear_admin_reader = function() {
     document.getElementById("checker").innerHTML = "";
+    document.getElementById("reader_emb").innerHTML = "";
 }

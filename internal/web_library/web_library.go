@@ -343,13 +343,14 @@ func (server *Server) storePages(book_id, guid, status string, page int) {
 			" book_id in (select book_id from verification where admin_id=$4)", page, page+10, book_id, guid)
 	} else if status == "user" {
 		rows, err = server.db.Query(server.ctx, "select page_data from page where num>=$1 and num <=$2 and book_id=$3 and"+
-			" book_id in (select guid from book where user_id=$4)", page, book_id, guid)
+			" book_id in (select guid from book where user_id=$4)", page, page+10, book_id, guid)
 	} else {
 		rows, err = server.db.Query(server.ctx, "select page_data from page where num>=$1 and num <=$2 and book_id=$3 and"+
 			" book_id not in (select book_id from verification)", page, page+10, book_id)
 	}
 	if err != nil {
 		server.logger.Error("can't retrieve pages to store", err)
+		return
 	}
 	for rows.Next() {
 		var bytea pgtype.Bytea
@@ -361,7 +362,7 @@ func (server *Server) storePages(book_id, guid, status string, page int) {
 		}
 		data, _ := bytea.Value()
 		dataB := data.([]byte)
-		key := book_id + "&" + strconv.Itoa(page)
+		key := book_id + "&" + guid + "&" + strconv.Itoa(page)
 		_, err = server.rdb.Pipelined(server.ctx, func(pipe redis.Pipeliner) error {
 			pipe.HSet(server.ctx, key,
 				"blob", string(dataB),
@@ -390,7 +391,7 @@ func (server *Server) getBookPage(w http.ResponseWriter, r *http.Request) {
 	}
 	typ := r.FormValue("type")
 	if typ == "gen" {
-		data, err := server.rdb.HGetAll(server.ctx, book_id+"&"+str_page).Result()
+		data, err := server.rdb.HGetAll(server.ctx, book_id+"&&"+str_page).Result()
 		if err != nil || len(data) == 0 {
 			if err != nil {
 				server.logger.Error("error while retrieving data from redis", err)
@@ -438,7 +439,7 @@ func (server *Server) getBookPage(w http.ResponseWriter, r *http.Request) {
 		if cookie != nil {
 			http.SetCookie(w, cookie)
 		}
-		data, err := server.rdb.HGetAll(server.ctx, book_id+"&"+str_page).Result()
+		data, err := server.rdb.HGetAll(server.ctx, book_id+"&"+guid+"&"+str_page).Result()
 		if err != nil || len(data) == 0 {
 			if err != nil {
 				server.logger.Error("error while retrieving data from redis", err)
@@ -486,7 +487,7 @@ func (server *Server) getBookPage(w http.ResponseWriter, r *http.Request) {
 		if cookie != nil {
 			http.SetCookie(w, cookie)
 		}
-		data, err := server.rdb.HGetAll(server.ctx, book_id+"&"+str_page).Result()
+		data, err := server.rdb.HGetAll(server.ctx, book_id+"&"+guid+"&"+str_page).Result()
 		if err != nil || len(data) == 0 {
 			if err != nil {
 				server.logger.Error("error while retrieving data from redis", err)
