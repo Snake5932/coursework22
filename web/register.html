@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Электронная библиотека</title>
+  <link rel="stylesheet" href="/static/styles.css" media="screen">
+  <script type="text/javascript" src="/static/scripts.js"></script>
+</head>
+<body class="u-body">
+<header class="u-clearfix u-custom-color-4">
+  <div style="display: inline-block; margin-left: 300px" class="u-clearfix u-sheet u-sheet-1">
+    <a href="/" class="href"><h1 class="u-text-default u-text-1">Электронная библиотека</h1></a>
+  </div>
+  <div class="u-btn-2">
+  <a href="/login" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-text-hover-custom-color-3">Войти</a>
+  </div>
+</header>
+<section class="u-clearfix u-section-1">
+  <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <h1 class="u-text u-text-default">Регистрация</h1>
+  </div>
+</section>
+<section class="u-clearfix u-section-2">
+  <div class="u-clearfix u-sheet-1 u-sheet-2">
+    <div class="u-form u-form-1">
+      <form>
+        <div class="u-form-group u-form-group-1">
+          <p>
+            <input type="email" oninput='checkEmail()' placeholder="Введите email" id="email" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+            <button type="button" onclick='sendMail()' id="btn_send_mail" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Выслать код</button>
+            <span id='emailMessage'></span>
+          </p>
+          <p>
+            <input placeholder="Введите проверочный код" id="code" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+            <button type="button" onclick='checkCode()' id="btn_confirm" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Подтвердить</button>
+            <span id='codeMessage'></span>
+          </p>
+          <p>
+            <input type="text" oninput='checkNickname()' placeholder="Введите имя пользователя" id="nickname" name="nickname" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+            <span id='nicknameMessage'></span>
+          </p>
+          <p>
+            <input type="password" oninput='checkPass()' placeholder="Введите пароль" id="pass" name="pass" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+          </p>
+          <p>
+            <input type="password" oninput='checkPass()' placeholder="Подтвердите пароль" id="passx2" name="passx2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+            <span id='passMessage'></span>
+          </p>
+          <p>
+            <button type="button" onclick='register()' id="btn" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Зарегистрироваться</button>
+            <span id='regMessage'></span>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>

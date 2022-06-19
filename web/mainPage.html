@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Электронная библиотека</title>
+    <link rel="stylesheet" href="/static/styles.css" media="screen">
+    <script type="text/javascript" src="/static/scripts.js"></script>
+</head>
+<body class="u-body">
+<header class="u-clearfix u-custom-color-4">
+    <div style="display: inline-block; margin-left: 300px" class="u-clearfix u-sheet u-sheet-1">
+        <a href="/" class="href"><h1 class="u-text-default u-text-1">Электронная библиотека</h1></a>
+    </div>
+    <div class="u-btn-2">
+        <a onclick='logout()' id="btn_send_mail" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-text-hover-custom-color-3">Выйти</a>
+    </div>
+</header>
+<section class="u-clearfix u-section-1">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <h1 class="u-text u-text-default">Личный кабинет</h1>
+    </div>
+</section>
+<section class="u-clearfix u-section-2">
+    <div class="u-clearfix u-sheet-1 u-sheet-2">
+        <div class="tabs">
+            <div id="my_books">
+                <div class="u-form u-form-1">
+                    <form name="find">
+                        <div class="u-form-group u-form-group-1">
+                            <p>
+                                <input placeholder="Название книги" id="bookName_find" oninput="find_names_user()" list="names" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                <datalist id="names">
+                                </datalist>
+                            </p>
+                            <span id="authors_find">
+                            </span>
+                            <p>
+                                <button type="button" onclick="addAuthor()" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Добавить автора</button>
+                            </p>
+                            <p>
+                                <select id="genre_find" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1">
+                                    <option value="-1">Жанр</option>
+                                    <option value="0">Фантастика</option>
+                                    <option value="1">Фэнтези</option>
+                                    <option value="2">Комиксы</option>
+                                    <option value="3">Сатира</option>
+                                    <option value="4">Детектив</option>
+                                    <option value="5">Приключения</option>
+                                    <option value="6">История</option>
+                                    <option value="7">Ужасы</option>
+                                    <option value="8">Религия</option>
+                                    <option value="9">Прочее</option>
+                                </select>
+                            </p>
+                            <p>
+                                <input placeholder="Написана не ранее" id="dateFieldNotBefore_find" type="number" min="-200000" max="2030" step="1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                            </p>
+                            <p>
+                                <input placeholder="Написана не позднее" id="dateFieldNotAfter_find" type="number" min="-200000" max="2030" step="1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                            </p>
+                            <p>
+                                <button type="button" onclick="findBook()" id="btn_find" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Найти</button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <div class="u-clearfix u-sheet-1 u-sheet-2">
+                    <div class="u-table u-table-1" id="user_book_list">
+                    </div>
+                    <span id='dataMessage'></span>
+                </div>
+            </div>
+            <div id="upload_book">
+                <div class="u-form u-form-1">
+                    <form name="upload">
+                        <div class="u-form-group u-form-group-1">
+                            <p>
+                                <input placeholder="Название книги" id="bookName" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                <span id='nameMessage'></span>
+                            </p>
+                            <span id="authors_load">
+                            </span>
+                            <p>
+                                <button type="button" onclick="addAuthor()" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Добавить автора</button>
+                                <span id='authorMessage'></span>
+                            </p>
+                            <p>
+                                <select id="genre" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1">
+                                    <option value="-1">Жанр</option>
+                                    <option value="0">Фантастика</option>
+                                    <option value="1">Фэнтези</option>
+                                    <option value="2">Комиксы</option>
+                                    <option value="3">Сатира</option>
+                                    <option value="4">Детектив</option>
+                                    <option value="5">Приключения</option>
+                                    <option value="6">История</option>
+                                    <option value="7">Религия</option>
+                                    <option value="8">Ужасы</option>
+                                    <option value="9">Прочее</option>
+                                </select>
+                            </p>
+                            <p>
+                                <input placeholder="Дата написания" id="dateField" type="number" min="-200000" max="2030" step="1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                            </p>
+                            <p>
+                                <input type="file" id="file" name="file" multiple accept="application/pdf" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                <span id='fileMessage'></span>
+                            </p>
+                            <p>
+                                <button type="button" onclick="uploadFile()" id="btn" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Загрузить</button>
+                                <span id='uploadMessage'></span>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="change_pass">
+                <div class="u-clearfix u-sheet-1 u-sheet-2">
+                    <div class="u-form u-form-1">
+                        <form>
+                            <div class="u-form-group u-form-group-1">
+                                    <input type="password" oninput='checkPass()' placeholder="Введите новый пароль" id="pass" name="pass" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                </p>
+                                <p>
+                                    <input type="password" oninput='checkPass()' placeholder="Подтвердите пароль" id="passx2" name="passx2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                    <span id='passMessage'></span>
+                                </p>
+                                <p>
+                                    <button type="button" onclick='changePass()' id="btn_pass" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Сменить пароль</button>
+                                    <span id='chPassMessage'></span>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs__links">
+                <a href="#my_books" onclick="setAuthors_find()">Мои книги</a>
+                <a href="#upload_book" onclick="setAuthors()">Загрузить книгу</a>
+                <a href="#change_pass" onclick="clear_reader()">Сменить пароль</a>
+            </div>
+        </div>
+        <div id="user_book_reader" class="u-clearfix u-sheet-1 u-sheet-2">
+        </div>
+    </div>
+    <div id="reader_emb" class="u-clearfix u-sheet-4">
+    </div>
+</section>
+</body>
+<script type="text/javascript">setAuthors_find()</script>
+</html>

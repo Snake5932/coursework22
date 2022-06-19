@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Электронная библиотека</title>
+    <link rel="stylesheet" href="/static/styles.css" media="screen">
+    <script type="text/javascript" src="/static/scripts.js"></script>
+</head>
+<body class="u-body">
+<header id="header" class="u-clearfix u-custom-color-4">
+    <div style="display: inline-block; margin-left: 300px" class="u-clearfix u-sheet u-sheet-1">
+        <a href="/" class="href"><h1 class="u-text-default u-text-1">Электронная библиотека</h1></a>
+    </div>
+</header>
+<section class="u-clearfix u-section-2">
+    <div class="u-clearfix u-sheet-1 u-sheet-2">
+        <div class="u-form u-form-1">
+            <form name="find">
+                <div class="u-form-group u-form-group-1">
+                    <p>
+                        <input placeholder="Название книги" id="bookName_find" oninput="find_names()" list="names" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                        <datalist id="names">
+                        </datalist>
+                    </p>
+                    <p id="authors">
+                        <input placeholder="Автор" id="0" oninput="find_author(this.id)" list="authorlist0" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                        <datalist id="authorlist0">
+                        </datalist>
+                    </p>
+                    <p>
+                        <button type="button" onclick="addAuthor()" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Добавить автора</button>
+                    </p>
+                    <p>
+                        <select id="genre_find" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1">
+                            <option value="-1">Жанр</option>
+                            <option value="0">Фантастика</option>
+                            <option value="1">Фэнтези</option>
+                            <option value="2">Комиксы</option>
+                            <option value="3">Сатира</option>
+                            <option value="4">Детектив</option>
+                            <option value="5">Приключения</option>
+                            <option value="6">История</option>
+                            <option value="7">Ужасы</option>
+                            <option value="8">Религия</option>
+                            <option value="9">Прочее</option>
+                        </select>
+                    </p>
+                    <p>
+                        <input placeholder="Написана не ранее" id="dateFieldNotBefore_find" type="number" min="-200000" max="2030" step="1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                    </p>
+                    <p>
+                        <input placeholder="Написана не позднее" id="dateFieldNotAfter_find" type="number" min="-200000" max="2030" step="1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                    </p>
+                    <p>
+                        <input placeholder="Владелец" id="owner" oninput="find_owners()" list="owners" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1"/>
+                        <datalist id="owners">
+                        </datalist>
+                    </p>
+                    <p>
+                        <button type="button" onclick="findBook_gen()" id="btn_find" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Найти</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="u-clearfix u-sheet-3">
+        <div class="u-table u-table-1" id="book_list">
+        </div>
+        <span id='dataMessage'></span>
+    </div>
+    <div id="book_reader" class="u-clearfix u-sheet-1 u-sheet-2">
+    </div>
+    <div id="reader_emb" class="u-clearfix u-sheet-4">
+    </div>
+</section>
+</body>
+<script type="text/javascript">setHeaderBtn()</script>
+</html>

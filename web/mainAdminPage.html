@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Электронная библиотека</title>
+    <link rel="stylesheet" href="/static/styles.css" media="screen">
+    <script type="text/javascript" src="/static/scripts.js"></script>
+</head>
+<body class="u-body">
+<header class="u-clearfix u-custom-color-4">
+    <div style="display: inline-block; margin-left: 300px" class="u-clearfix u-sheet u-sheet-1">
+        <a href="/" class="href"><h1 class="u-text-default u-text-1">Электронная библиотека</h1></a>
+    </div>
+    <div class="u-btn-2">
+        <a onclick='logout()' id="btn_send_mail" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-text-hover-custom-color-3">Выйти</a>
+    </div>
+</header>
+<section class="u-clearfix u-section-1">
+    <div class="u-clearfix u-valign-middle u-sheet-1">
+        <h1 class="u-text u-text-default">Личный кабинет администратора</h1>
+    </div>
+</section>
+<section class="u-clearfix u-section-2">
+    <div class="u-clearfix u-sheet-1 u-sheet-2">
+        <div class="tabs">
+            <div id="ban_user">
+                <div class="u-clearfix u-sheet-1 u-sheet-2">
+                    <div class="u-form u-form-1">
+                        <form>
+                            <div class="u-form-group u-form-group-1">
+                                <p>
+                                    <input placeholder="Введите email или nickname" oninput="find_user_var()" list="users" id="user" name="user" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                    <span id='banMessage'></span>
+                                </p>
+                                <p>
+                                    <datalist id="users">
+                                    </datalist>
+                                </p>
+                                <p>
+                                    <a href="#ban_user"><button type="button" onclick="find_user()" id="btn" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Найти</button></a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="u-table u-table-1" id="table_div">
+                    </div>
+                </div>
+            </div>
+            <div id="check_book">
+                <div class="u-clearfix u-sheet-1 u-sheet-2">
+                    <div class="u-table u-table-1" id="table_div_check">
+                    </div>
+                    <span id='dataMessage'></span>
+                </div>
+            </div>
+            <div id="change_pass">
+                <div class="u-clearfix u-sheet-1 u-sheet-2">
+                    <div class="u-form u-form-1">
+                        <form>
+                            <div class="u-form-group u-form-group-1">
+                                <input type="password" oninput='checkPass()' placeholder="Введите новый пароль" id="pass" name="pass" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                </p>
+                                <p>
+                                    <input type="password" oninput='checkPass()' placeholder="Подтвердите пароль" id="passx2" name="passx2" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-1" required/>
+                                    <span id='passMessage'></span>
+                                </p>
+                                <p>
+                                    <button type="button" onclick='changePass()' id="btn_pass" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1">Сменить пароль</button>
+                                    <span id='chPassMessage'></span>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs__links" id="tabs">
+            </div>
+        </div>
+        <div id="checker" class="u-clearfix u-sheet-1 u-sheet-2">
+        </div>
+    </div>
+    <div id="reader_emb" class="u-clearfix u-sheet-4">
+    </div>
+</section>
+
+<div id="check_res" class="ban">
+    <a href="#check_book" class="back"></a>
+    <div class="window">
+        <div>
+            <div id="ownername" class="display: inline-block;"></div>
+            <div id="bookname" class="display: inline-block;"></div>
+        </div>
+        <p>
+            <label>
+                <textarea placeholder="причина" id="decline_reason" name="decline_reason" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-2 textarea_class" required></textarea>
+            </label>
+        </p>
+        <p>
+            <a href="#check_book" onclick="clear_admin_reader()" id="decl_btn"></a>
+        </p>
+    </div>
+</div>
+
+<div id="ban" class="ban">
+    <a href="#ban_user" class="back"></a>
+    <div class="window">
+        <p id="username"></p>
+        <p>
+            <label>
+                <textarea placeholder="причина" id="ban_reason" name="ban_reason" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-input-2 textarea_class" required></textarea>
+            </label>
+        </p>
+        <p>
+            <a href="#ban_user"><button type="button" onclick="ban()" id="ban_btn" class="u-form-group u-form-submit u-border-none u-btn u-btn-submit u-button-style u-custom-color-2 u-text-hover-custom-color-3 u-btn-1"></button></a>
+        </p>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">setMenu()</script>
+<script type="text/javascript">setChecks()</script>
+</html>
