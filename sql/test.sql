@@ -22,7 +22,9 @@ select * from verification;
 
 delete from book where book_name = 'hobbit';
 
-select * from book;
+select * from aut_book_interm where author_id='f400de50-7932-4ec0-91d1-8edb19ae9b22';
+
+select * from author;
 
 select * from administrator;
 

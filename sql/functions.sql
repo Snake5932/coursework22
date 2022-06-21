@@ -118,3 +118,23 @@ BEGIN
     return new;
 END;
 $$;
+
+CREATE OR REPLACE FUNCTION check_is_user_banned() RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    if true=(select banned from end_user where guid=new.user_id) then
+        RAISE EXCEPTION 'user is banned';
+    end if;
+    return new;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION del_author() RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    delete from author where guid not in (select distinct author_id from aut_book_interm);
+    return old;
+END;
+$$;

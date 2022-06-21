@@ -65,3 +65,17 @@ create constraint trigger add_page_num after insert
     deferrable initially deferred
     for each row
     execute function add_pages();
+    
+drop trigger if exists user_book_banned on book;
+
+create trigger user_book_banned before insert
+    on book
+    for each row
+    execute function check_is_user_banned();
+      
+drop trigger if exists author_del on aut_book_interm;
+
+create trigger author_del after delete
+    on aut_book_interm
+    for each row
+    execute function del_author();
