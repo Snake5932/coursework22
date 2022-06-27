@@ -41,6 +41,7 @@ create table book (
     book_genre genre NOT NULL,
     write_year smallint DEFAULT 2022,
     page_num smallint DEFAULT 0,
+    appprover uuid,
     primary key(guid),
     foreign key (user_id) references end_user (guid)
 );

@@ -63,6 +63,9 @@ BEGIN
     update administrator
     set check_num = check_num - 1
     where guid = old.admin_id;
+    update book
+    set approver = old.admin_id
+    where guid = old.book_id;
     return old;
 END;
 $$;

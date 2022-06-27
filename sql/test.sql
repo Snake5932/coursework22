@@ -24,7 +24,7 @@ delete from book where book_name = 'hobbit';
 
 select * from aut_book_interm where author_id='f400de50-7932-4ec0-91d1-8edb19ae9b22';
 
-select * from author;
+select * from book;
 
 select * from administrator;
 
@@ -33,3 +33,7 @@ select * from verification;
 delete from verification where guid='2dc97363-6e3a-4df6-95b7-493752fbe86b';
 
 insert into verification(book_id, admin_id) values('202c0b18-2038-46c2-b90c-fe655c10bf14', '090621d2-f23c-480b-be25-bab319960cf0');
+
+
+alter table book
+add approver uuid;
